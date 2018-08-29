@@ -1,0 +1,175 @@
+@import "variables";
+
+*
+{
+    margin: 0px;
+    padding: 0px;
+    font-family: "Roboto-Regular";
+}
+
+body
+{
+    > img
+    {
+        height: 100vh;
+        width: 100%;
+        filter: brightness(40%);
+        position: absolute;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    header
+    {
+        height: 64px;
+        widows: 100%;
+
+        .headerTop
+        {
+            position: absolute;
+            top: 0px;
+            height: 44px;
+            width: 100%;
+            padding-left: 2%;
+            margin-top: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+
+        .logo-container
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: stretch;
+            margin-right: 5%;
+            height: 44px;
+
+            > img
+            {
+                width: 30px;
+                vertical-align: middle;
+            }
+
+            > p
+            {
+                font-family: "Roboto-Bold";
+                margin-left: 10px;
+                line-height: 44px;
+                color: $li_text_color;
+            }
+        }
+
+        .burger-container
+        {
+            margin-left: auto;
+            margin-right: 20px;
+            z-index: 1;
+
+            @media all and (min-width: 769px)
+            {
+                display: none;
+            }
+
+            .burger
+            {
+                position: relative;
+                top: 8px;
+
+                &:hover
+                {
+                    cursor: pointer;
+                }
+
+                .burger-top, .burger-middle, .burger-bottom
+                {
+                    display: block;
+                    height: 5px;
+                    width: 36px;
+                    border-radius: 3px;
+                    background-color: white;
+                    transition: all 0.3s ease;
+                }
+
+                .burger-top, .burger-middle
+                {
+                    margin-bottom: 7px;
+                }
+
+                .animation-top
+                {
+                    transform: rotate(-45deg) translate(-8px, 9px);
+                }
+            
+                .animation-middle
+                {
+                    opacity: 0;
+                }
+            
+                .animation-bottom
+                {
+                    transform: rotate(45deg) translate(-8px, -9px);
+                }
+            }
+        }
+    }
+
+    footer
+    {
+        height: 50px;
+        line-height: 50px;
+        position: absolute;
+        bottom: 0px;
+        font-size: 10pt;
+        color: white;
+        padding: 0% 3%;
+        text-align: right;
+        vertical-align: middle;
+        width: 100%;
+
+        @media all and (max-width: 768px)
+        {
+            font-size: 8pt;
+        }
+
+        > span
+        {
+            color: $footer_span_color;
+        }
+    }
+
+    main
+    {
+        height: fit-content;
+
+        .main-container
+        {
+            margin: auto;
+            position: relative;
+            height: calc(100vh - 114px);
+
+            .row
+            {
+                top: 35%;
+            
+                .errorMessage
+                {
+                    color: white;
+                    font-family: "Roboto-Bold";
+                    font-size: 64px;
+                    text-align: center;
+                }
+
+                button
+                {
+                    left: 50%;
+                    transform: translateX(-50%);
+                    position: relative;
+                }
+            }
+        }
+    }
+}

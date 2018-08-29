@@ -1,0 +1,5 @@
+.navbar-collapse:after,
+.navbar-collapse:before, {
+    display: table;
+    content: " "
+}

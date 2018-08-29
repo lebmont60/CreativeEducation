@@ -1,0 +1,386 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+//temporaire
+/* section[class*="col"]
+{
+    background-color: red;
+    color: white;
+    text-align: center;
+} */
+
+.row
+{
+    width: 100%;
+    padding: 0% 0.5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+
+//========================================================================\\
+//---------------------------EXTRA-SMALL-COLUMN---------------------------\\
+//========================================================================\\
+
+    .col-xs
+    {
+        @media all and (max-width: 768px)
+        {
+            width: 99%;
+        }
+    }
+
+//========================================================================\\
+//------------------------------SMALL-COLUMN------------------------------\\
+//========================================================================\\
+
+    .col-sm-1
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% / 12 - 1%);
+        }
+    }
+
+    .col-sm-2
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% / 6 - 1%);
+        }
+    }
+
+    .col-sm-3
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% / 4 - 1%);
+        }
+    }
+
+    .col-sm-4
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% / 3 - 1%);
+        }
+    }
+
+    .col-sm-5
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% * 5 / 12 - 1%);
+        }
+    }
+
+    .col-sm-6
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% / 2 - 1%);
+        }
+    }
+
+    .col-sm-7
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% * 7 / 12 - 1%);
+        }
+    }
+
+    .col-sm-8
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% * 8 / 12 - 1%);
+        }
+    }
+
+    .col-sm-9
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% * 9 / 12 - 1%);
+        }
+    }
+
+    .col-sm-10
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% / 6 - 1%);
+        }
+    }
+
+    .col-sm-11
+    {
+        @media all and (min-width: 768px)
+        {
+            width: calc(100% / 6 - 1%);
+        }
+    }
+
+    .col-sm-12
+    {
+        @media all and (min-width: 768px)
+        {
+            width: 99%;
+        }
+    }
+
+//=======================================================================\\
+//-----------------------------MEDIUM-COLUMN-----------------------------\\
+//=======================================================================\\
+
+    .col-md-1
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% / 12 - 1%);
+        }
+    }
+
+    .col-md-2
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% / 6 - 1%);
+        }
+    }
+
+    .col-md-3
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% / 4 - 1%);
+        }
+    }
+
+    .col-md-4
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% / 3 - 1%);
+        }
+    }
+
+    .col-md-5
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% * 5 / 12 - 1%);
+        }
+    }
+
+    .col-md-6
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% / 2 - 1%);
+        }
+    }
+
+    .col-md-7
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% * 7 / 12 - 1%);
+        }
+    }
+
+    .col-md-8
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% * 8 / 12 - 1%);
+        }
+    }
+
+    .col-md-9
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% * 9 / 12 - 1%);
+        }
+    }
+
+    .col-md-10
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% * 10 / 12 - 1%);
+        }
+    }
+
+    .col-md-11
+    {
+        @media all and (min-width: 992px)
+        {
+            width: calc(100% * 11 / 12 - 1%);
+        }
+    }
+
+    .col-md-12
+    {
+        @media all and (min-width: 992px)
+        {
+            width: 99%;
+        }
+    }
+
+//========================================================================\\
+//------------------------------LARGE-COLUMN------------------------------\\
+//========================================================================\\
+
+    .col-lg-1
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% / 12 - 1%);
+        }
+    }
+
+    .col-lg-2
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% / 6 - 1%);
+        }
+    }
+
+    .col-lg-3
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% / 4 - 1%);
+        }    
+    }
+
+    .col-lg-4
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% / 3 - 1%);
+        }
+    }
+
+    .col-lg-5
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% * 5 / 12 - 1%);
+        } 
+    }
+
+    .col-lg-6
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% / 2 - 1%);
+        }
+    }
+
+    .col-lg-7
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% * 7 / 12 - 1%);
+        }    
+    }
+
+    .col-lg-8
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% * 8 / 12 - 1%);
+        }
+    }
+
+    .col-lg-9
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% * 9 / 12 - 1%);
+        }
+    }
+
+    .col-lg-10
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% * 10 / 12 - 1%);
+        }    
+    }
+
+    .col-lg-11
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: calc(100% * 11 / 12 - 1%);
+        }
+    }
+
+    .col-lg-12
+    {
+        margin: 0.5% 0.5%;
+        padding: 1%;
+        border-radius: 5px;
+
+        @media all and (min-width: 1200px)
+        {
+            width: 99%;
+        }
+    }
+}
+

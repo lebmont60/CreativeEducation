@@ -1,0 +1,84 @@
+#test
+{
+    display: none;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    color: white;
+}
+
+#alertsContainer
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    right: 0px;
+    top: 0px;
+    margin-right: 20px;
+    box-sizing: border-box;
+    width: 360px;
+    height: fit-content;
+
+    > .alert
+    {
+        position: relative;
+        display: none;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        border-radius: 3px;
+        padding: 15px;
+        width: 100%;
+        height: fit-content;
+        margin-top: 20px;
+        line-height: 20px;
+        text-align: justify;
+
+        > .alertClose
+        {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            border-radius: 10px;
+         
+            > i
+            {
+                font-size: 18px;
+            
+                &:hover
+                {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        > .alertContent
+        {
+            position: relative;
+            font-weight: 700;
+            font-size: 14px;
+        }
+    }
+
+    > .alert-success
+    {
+        background-image: linear-gradient(to bottom, #6ec071, #66bc69, #5db861, #55b358, #4caf50);
+        border: 1px solid #388c28;
+        color: #0e3906;
+    }
+
+    > .alert-error
+    {
+        background-image: linear-gradient(to bottom, #f77066, #f7665a, #f65b4f, #f54f43, #f44336);
+        border: 1px solid #ce2c2c;
+        color: #450000;
+    }
+
+    > .alert-info
+    {
+        background-image: linear-gradient(to bottom, #ffad33, #ffa82a, #ffa31f, #ff9d13, #ff9800);
+        border: 1px solid #e29330;
+        color: #494102;
+    }
+}

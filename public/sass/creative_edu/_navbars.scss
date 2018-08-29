@@ -1,0 +1,228 @@
+.navbar {
+    //   background-color: $brand-primary;
+    border: 0;
+    border-radius: $border-radius-base; // @include shadow-big-navbar();
+    border-bottom: 1px solid #ededf3;
+    @extend .animation-transition-fast;
+
+    padding: 10px 0;
+
+    .navbar-brand {
+        position: relative;
+        height: 50px;
+        line-height: 30px;
+        color: inherit;
+        padding: 10px 15px;
+
+        &:hover,
+        &:focus {
+            color: inherit;
+            background-color: transparent;
+        }
+    }
+
+    .navbar-minimize {
+        float: left;
+        padding: 3px 0 0 15px;
+    }
+
+    .navbar-text {
+        color: inherit;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .navbar-nav {
+        > li > a {
+            color: inherit;
+            padding-top: 15px;
+            padding-bottom: 15px;
+
+            font-weight: $font-weight-bold;
+            font-size: $db-btn-font-size-base;
+            text-transform: uppercase;
+
+            border-radius: $border-radius-base;
+
+            &:hover,
+            &:focus {
+                color: inherit;
+                background-color: transparent;
+            }
+
+
+            .material-icons,
+            .fa {
+                font-size: 20px;
+            }
+
+            &.btn:not(.btn-just-icon) {
+                .fa {
+                    position: relative;
+                    top: 2px;
+                    margin-top: -4px;
+                    margin-right: 4px;
+                }
+            }
+        }
+
+        > li > .dropdown-menu {
+            @include transform-translate-y(-20px);
+        }
+
+        > li.open > .dropdown-menu {
+            @include transform-translate-y(0);
+        }
+
+        > .active > a {
+            &,
+            &:hover,
+            &:focus {
+                color: inherit;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+        > .disabled > a {
+            &,
+            &:hover,
+            &:focus {
+                color: inherit;
+                background-color: transparent;
+                opacity: 0.9;
+            }
+        }
+        .profile-photo {
+            padding: 0 5px 0;
+            .profile-photo-small {
+                height: 40px;
+                width: 40px;
+            }
+        }
+
+    } // Darken the responsive nav toggle
+    .navbar-toggle {
+        border: 0;
+        &:hover,
+        &:focus {
+            background-color: transparent;
+        }
+        .icon-bar {
+            background-color: inherit;
+            border: 1px solid;
+        }
+    }
+
+    .navbar-default .navbar-toggle,
+    .navbar-inverse .navbar-toggle {
+        border-color: transparent;
+    }
+
+    .navbar-collapse,
+    .navbar-form {
+        border-top: none;
+        box-shadow: none;
+    } // Dropdowns
+    .navbar-nav {
+        > .open > a {
+            &,
+            &:hover,
+            &:focus {
+                background-color: transparent;
+                color: inherit;
+            }
+        }
+    }
+
+    &.navbar-default {
+        .logo-container .brand {
+            color: $gray;
+        }
+    }
+
+    .navbar-link {
+        color: inherit;
+        &:hover {
+            color: inherit;
+        }
+    }
+
+    .btn {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .btn-link {
+        color: inherit;
+        &:hover,
+        &:focus {
+            color: inherit;
+        }
+        &[disabled],
+        fieldset[disabled] & {
+            &:hover,
+            &:focus {
+                color: inherit;
+            }
+        }
+    }
+
+    .alert {
+        border-radius: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 85px;
+        width: 100%;
+        z-index: 3;
+        transition: all 0.3s;
+    }
+}
+
+.nav-center {
+    text-align: center;
+
+    .nav-pills-icons {
+        display: inline-block;
+    }
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none
+}
+
+.nav > li {
+    position: relative;
+    display: block
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px
+}
+
+.nav > li > a:focus,
+.nav > li > a:hover {
+    text-decoration: none;
+    background-color: #eee
+}
+
+.nav-align-center {
+    text-align: center;
+
+    .nav-pills {
+        display: inline-block;
+    }
+}
+
+.navbar-absolute {
+    position: absolute;
+    width: 100%;
+    padding-top: 10px;
+    z-index: 1029;
+}
+
+.navbar-right {
+    float: right;
+}
