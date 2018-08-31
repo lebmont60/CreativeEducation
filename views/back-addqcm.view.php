@@ -10,8 +10,7 @@
                         <div class="card-content">
                             <h4 class="card-title">Formulaire d'ajout de qcm</h4>
 
-                            <?php $this->addModal("form_all", $config, $errors); ?>
-
+                            <?php $this->addModal("form_qcm", $config, $errors); ?>
                         </div>
                     </div>
                 </div>
@@ -21,22 +20,20 @@
 </div>
 <script>
 
-    let $addLink = $('#add_question');
-    let $newLink = $('<div></div>').append($addLink);
     jQuery(document).ready(function() {
+        let $addLink = $('#add_question_link');
         let $form = $('form');
-        $form.append($newLink);
         $form.data('index', $form.find(':input .question').length);
 
         $addLink.on('click', function(e) {
             e.preventDefault();
-            addQuestion($form, $newLink);
+            addQuestion($form, $addLink);
         });
 
 
     });
 
-    function addQuestion($form, $newLink) {
+    function addQuestion($form, $addLink) {
         let question = $addLink.data('question');
 
         let index = $form.data('index');
@@ -50,18 +47,13 @@
 
         let newForm = question.replace(/__index__/g, index);
 
-        let $newQuestion = $('#form_content').append(newForm);
+        let $newQuestion = $('#add_question').before(newForm);
 
         $('#question_'+(index)).append('<a href="#" class="remove-question">X</a>');
 
-        $newLink.before($newQuestion);
-
-        // handle the removal, just for this example
 
         $('.remove-question').click(function(e) {
             e.preventDefault();
-
-            $form.data('index', index-1);
             $(this).parent().remove();
 
             return false;

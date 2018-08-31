@@ -9,7 +9,7 @@
 
             <?php
             foreach ($config["div"] as $div_config):
-                echo "<div id='".$div_config['id']."'>";
+            echo "<div id='".$div_config['id']."'>";
 
             foreach ($div_config["input"] as $name => $params):?>
 
@@ -56,7 +56,6 @@
 
         <?php endif;?>
 
-        </div>
         <?php endforeach;?>
 
         <?php foreach($div_config["select"] as $name=>$params):?>
@@ -74,7 +73,7 @@
 
                 <?php foreach($div_config["a"] as $name=>$params):?>
 
-                <a href="#" class='<?php
+                <a href="#" class="<?php
                 echo $name."' ";
                 if (isset($params["data"])){
                     foreach($params['data'] as $dataName => $dataValue){
@@ -86,12 +85,13 @@
                 }
                 ?>><?php echo $params["name"]?></a>
 
+            </div>';
+            <?php endforeach;
+                endforeach?>
+
+        <div id="more_questions"> </div>
+            <div>
+                <input type="submit" value="<?php echo $config["config"]["submit"];?>">
             </div>
-
-        <?php endforeach;
-            endforeach?>
-
         </div>
-        <input type="submit" value="<?php echo $config["config"]["submit"];?>">
-
     </form>

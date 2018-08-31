@@ -5,6 +5,7 @@ class BaseSQL
     private $table;
     private $columns;
     protected $foreign_keys;
+    protected $parent_key;
 
     public function __construct()
     {
@@ -72,6 +73,7 @@ class BaseSQL
                     unset($this->columns[$key]);
                 } elseif(array_key_exists($key, $foreignKey)){
                     $this->columns[$key] = $foreignKey[$key];
+                    $where_content .= ' AND '.$key."='".$foreignKey[$key]."'";
                 } else{
                     if($where_content == ''){
                         $where_content .= ' '.$key."='".$value."'";
@@ -82,7 +84,6 @@ class BaseSQL
             }
             $query = $this->pdo->prepare("INSERT INTO ".$this->table." (`". implode("`, `", array_keys($this->columns)) ."`)
                                               VALUES (:". implode(", :", array_keys($this->columns)) .")");
-
             $query->execute($this->columns);
 
             $queryConditions = [
@@ -284,9 +285,7 @@ class BaseSQL
         }
 
         $query->execute();
-//        echo '<pre>';
-//            print_r($query->queryString);
-//        echo '</pre>';
+
         $results = $query->fetchAll(PDO::FETCH_CLASS, $this->table);
         if($conditions == null || !isset($conditions['select']) || empty($conditions['select']) || $conditions['select'][0] == '*' || $conditions['select'][0] == $this->table.'.*'){
             $foreign_array = [];

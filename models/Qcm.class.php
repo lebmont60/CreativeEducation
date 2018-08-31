@@ -12,7 +12,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this->foreign_keys = ['question'];
+            $this->foreign_keys = ['Question'];
             $this->question = [];
         }
 
@@ -76,8 +76,17 @@
             return $this->id_user;
         }
 
-        public function getQuestion(){
+        public function getQuestions(){
             return $this->question;
+        }
+
+        public function getQuestion($question_content){
+            foreach($this->question as $question){
+                if($question->getQuestionContent() == $question_content){
+                    return $question;
+                }
+            }
+            return null;
         }
 
         public function addQuestion($question){
@@ -102,7 +111,7 @@
             return [
             "config" => [
                 "method" => "POST",
-                "action" => "add",
+                "action" => "",
                 "submit" => "Ajouter un QCM",
                 "id" => "form_add_qcm",
                 "class" => 'form',
@@ -189,6 +198,12 @@
                     ],
                     "select"=>[],
                     "a"=>[
+                    ]
+                ],
+                [
+                    "input" =>[],
+                    "select" =>[],
+                    "a" =>[
                         "add_question" =>[
                             "data"=>[
                                 "question"=>"<div id='question___index__'><div id='Question___index___question' class='question'>        
@@ -223,9 +238,8 @@
 
                             ],
                             'name'=>'Ajouter une question',
-                            'id' => 'add_question'
-                        ]
-                    ]
+                            'id' => 'add_question_link'
+                        ]]
                 ]
             ],
 
@@ -236,7 +250,7 @@
             $list = [
                 "config" => [
                     "method" => "POST",
-                    "action" => "update",
+                    "action" => "",
                     "submit" => "Ajouter un QCM",
                     "id" => "form_update_qcm",
                     "class" => 'form',
@@ -255,14 +269,16 @@
                             ],
                         ],
                         "select" =>[],
-                        "a"=>[]
+                        "a"=>[
+
+                        ]
                     ],
 
                 ],
 
             ];
             $index = 1;
-            foreach($this->getQuestion() as $question){
+            foreach($this->getQuestions() as $question){
                 $question_list = [
                     "id" => "question_".$index,
                     "input" => [
@@ -275,12 +291,61 @@
                             "required" => true,
                             "value"=> $question->getQuestionContent()
                         ],
+                        "Question".$index."[status]" =>[
+                            "id" => "Question_".$index."_status",
+                            "class" => "question-status",
+                            "label" => 'Activé',
+                            "type" => "checkbox",
+                        ],
                     ],
                     "select"=>[],
                     "a"=>[
                         "remove-question" =>[
-                            "data"=>[
-                                "question"=>"<div id='question___index__'><div id='Question___index___question' class='question'>        
+                            'name'=>'X',
+                            'class' => 'remove-question',
+                            'data' => [
+                               "remove"=>"question_".$index
+                            ]
+                        ]
+                    ]
+                ];
+                if($question->getStatus() == 1){
+                    $question_list['input']["Question".$index."[status]"]["checked"] = true;
+                }
+                $reponse_index = 1;
+                foreach($question->getPossibleAnswers() as $reponse){
+                    $question_list["input"]["Question"]["reponse"] = [
+                        "id" => "Question_".$index."_reponse".$reponse_index."_reponse",
+                        "type" => 'text',
+                        "class"=> 'answer',
+                        'label' => 'Réponse n°'.$reponse_index,
+                        "placeholder" => "Votre réponse",
+                        "value" => $reponse->getAnswerContent()
+                    ];
+                     $question_list["input"]["Question"]["reponse"]["value"] = [
+                        "id" => "Question_".$index."_reponse4_value",
+                        "type" => "checkbox",
+                        "class"=> 'answer',
+                        'label' => 'bonne réponse',
+                    ];
+                     if($reponse->getGoodResponse() == 1){
+                         $question_list["input"]["Question".$index."[reponse".$reponse_index."][value]"]["checked"] = true;
+                     }
+                    $reponse_index += 1;
+                }
+                $index += 1;
+                $list["div"][] = $question_list;
+            }
+            $list["div"][]= [
+                "id" => 'add_question',
+                "input" => [],
+                "select" =>[
+
+                ],
+                "a"=>[
+                    "add_question" =>[
+                        "data"=>[
+                            "question"=>"<div id='question___index__'><div id='Question___index___question' class='question'>        
                                     <label>Question</label>
                                     <input type='text'name='Question__index__[question]'placeholder='Question' required='required'>
                                     </div><div id='Question___index___reponse1_reponse' class='answer'>
@@ -310,36 +375,219 @@
                                     </div>
                                     </div>",
 
-                            ],
-                            'name'=>'X',
-                            'class' => 'remove-question'
-                        ]
+                        ],
+                        'name'=>'Ajouter une question',
+                        'id' => 'add_question_link'
                     ]
-                ];
-                $reponse_index = 1;
-                foreach($question->getPossibleAnswers() as $reponse){
-                    $question_list["input"]["Question".$reponse_index."[reponse4][reponse]"] = [
-                        "id" => "Question_".$index."_reponse4_reponse",
-                        "type" => 'text',
-                        "class"=> 'answer',
-                        'label' => 'Réponse n°4',
-                        "placeholder" => "Votre réponse",
-                        "value" => $reponse->getAnswerContent()
-                    ];
-                     $question_list["input"]["Question".$reponse_index."[reponse4][value]"] = [
-                        "id" => "Question_".$index."_reponse4_value",
-                        "type" => "checkbox",
-                        "class"=> 'answer',
-                        'label' => 'bonne réponse',
-                    ];
-                     if($reponse->getGoodResponse() == 1){
-                         $question_list["input"]["Question".$reponse_index."[reponse4][value]"]["checked"] = true;
-                     }
-                    $reponse_index += 1;
-                }
-                $index += 1;
-                $list["div"][] = $question_list;
-            }
+                ]
+            ];
             return $list;
         }
+
+        public function listQcmTable()
+        {
+            $user = new User();
+
+            //si user est professeur, on récupère uniquement les qcms qu'il a créés
+            if($user->isProfessor())
+            {
+                //qcms liés au professeur connecté
+                $queryConditions = [
+                    "select"=>[
+                        "qcm.*"
+                    ],
+                    "join"=>[
+                        "inner_join"=>[],
+                        "left_join"=>[],
+                        "right_join"=>[]
+                    ],
+                    "where"=>[
+                        "clause"=>"`course`.`id_user` = '".$_SESSION['user']['id']."'",
+                        "and"=>[],
+                        "or"=>[]
+                    ],
+                    "and"=>[
+                        [
+                            "clause"=>"",
+                            "and"=>[],
+                            "or"=>[]
+                        ]
+                    ],
+                    "or"=>[
+                        [
+                            "clause"=>"",
+                            "and"=>[],
+                            "or"=>[]
+                        ]
+                    ],
+                    "group_by"=>[],
+                    "having"=>[
+                        "clause"=>"",
+                        "and"=>[],
+                        "or"=>[]
+                    ],
+                    "order_by"=>[
+                        "asc"=>[],
+                        "desc"=>[]
+                    ],
+                    "limit"=>[
+                        "offset"=>"",
+                        "range"=>""
+                    ]
+                ];
+
+                $qcm = new Qcm();
+                $qcms = $qcm->getAll($queryConditions);
+            }
+            //si user est admin, on récupère tous les cours
+            elseif($user->isAdmin())
+            {
+                $qcm = new Qcm();
+                $qcms = $qcm->getAll();
+            }
+
+            //création tableau à fournir au modal
+            $arrayQcms = [];
+
+            foreach($qcms as $qcm)
+            {
+
+                /**
+                 * @var Qcm $qcm
+                 */
+
+                //récupération du status
+                $queryConditions = [
+                    "select"=>[
+                        "status.*"
+                    ],
+                    "join"=>[
+                        "inner_join"=>[],
+                        "left_join"=>[],
+                        "right_join"=>[]
+                    ],
+                    "where"=>[
+                        "clause"=>"`status`.`id` = '".$qcm->getStatus()."'",
+                        "and"=>[],
+                        "or"=>[]
+                    ],
+                    "and"=>[
+                        [
+                            "clause"=>"",
+                            "and"=>[],
+                            "or"=>[]
+                        ]
+                    ],
+                    "or"=>[
+                        [
+                            "clause"=>"",
+                            "and"=>[],
+                            "or"=>[]
+                        ]
+                    ],
+                    "group_by"=>[],
+                    "having"=>[
+                        "clause"=>"",
+                        "and"=>[],
+                        "or"=>[]
+                    ],
+                    "order_by"=>[
+                        "asc"=>[],
+                        "desc"=>[]
+                    ],
+                    "limit"=>[
+                        "offset"=>"",
+                        "range"=>""
+                    ]
+                ];
+
+                $status = new Status();
+                $targetedStatus = $status->getAll($queryConditions)[0];
+
+                //récupération du user qui a créé le qcm
+                $queryConditions = [
+                    "select"=>[
+                        "user.*"
+                    ],
+                    "join"=>[
+                        "inner_join"=>[],
+                        "left_join"=>[],
+                        "right_join"=>[]
+                    ],
+                    "where"=>[
+                        "clause"=>"`user`.`id` = '".$qcm->getId_user()."'",
+                        "and"=>[],
+                        "or"=>[]
+                    ],
+                    "and"=>[
+                        [
+                            "clause"=>"",
+                            "and"=>[],
+                            "or"=>[]
+                        ]
+                    ],
+                    "or"=>[
+                        [
+                            "clause"=>"",
+                            "and"=>[],
+                            "or"=>[]
+                        ]
+                    ],
+                    "group_by"=>[],
+                    "having"=>[
+                        "clause"=>"",
+                        "and"=>[],
+                        "or"=>[]
+                    ],
+                    "order_by"=>[
+                        "asc"=>[],
+                        "desc"=>[]
+                    ],
+                    "limit"=>[
+                        "offset"=>"",
+                        "range"=>""
+                    ]
+                ];
+
+                $targetedUser = $user->getAll($queryConditions)[0];
+
+                $idQcm = $qcm->getId();
+                $arrayQcms[$idQcm]['title'] = $qcm->getTitle();
+                $arrayQcms[$idQcm]['insertedDate'] = Helpers::europeanDateFormat($qcm->getInsertedDate());
+                $arrayQcms[$idQcm]['creator'] = Helpers::cleanFirstname($targetedUser->getFirstname()).' '.Helpers::cleanLastname($targetedUser->getLastname());
+                $arrayQcms[$idQcm]['status'] = $targetedStatus->getName();
+                $arrayQcms[$idQcm]['actions']['edit']['path'] = 'qcm/update/'.$idQcm;
+                $arrayQcms[$idQcm]['actions']['edit']['icon'] = 'build';
+                $arrayQcms[$idQcm]['actions']['edit']['color'] = 'blue';
+
+                //changement du bouton en fonction du statut du user : si activé, on affiche le bouton de désactivation
+                if($qcm->getStatus() == 1)
+                {
+                    $arrayQcms[$idQcm]['actions']['delete']['path'] = 'qcm/delete/'.$idQcm;
+                    $arrayQcms[$idQcm]['actions']['delete']['icon'] = 'close';
+                    $arrayQcms[$idQcm]['actions']['delete']['color'] = 'red';
+                }
+                //sinon on affiche le bouton d'activation
+                elseif($qcm->getStatus() == 0)
+                {
+                    $arrayQcms[$idQcm]['actions']['delete']['path'] = 'qcm/activate/'.$idQcm;
+                    $arrayQcms[$idQcm]['actions']['delete']['icon'] = 'check';
+                    $arrayQcms[$idQcm]['actions']['delete']['color'] = 'green';
+                }
+            }
+
+            return [
+                "thead" => [
+                    "Titre",
+                    "Date d'ajout",
+                    "Créateur",
+                    "Statut",
+                    "Actions"
+                ],
+                "content" => $arrayQcms
+            ];
+        }
+
+
+        
     }

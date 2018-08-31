@@ -159,6 +159,33 @@
                             </ul>
                         </div>
                     </li>
+                    <!-- Liste des qcms -->
+                    <li class="<?php echo ($c == 'QcmController')?'active':''; ?>">
+                        <a data-toggle="collapse" href="#Qcm-menu">
+                            <i class="material-icons">category</i>
+                            <p>Qcm<strong class="caret"></strong> </p>
+                        </a>
+                        <div class="collapse" id="Qcm-menu">
+                            <ul class="nav">
+                                <li>
+                                    <a href="<?php echo DIRNAME.'qcm'; ?>">
+                                        <span class="sidebar-mini">
+                                            <i class="material-icons">list</i>
+                                        </span>
+                                        <span class="sidebar-normal">Liste</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo DIRNAME.'qcm/add'; ?>">
+                                        <span class="sidebar-mini">
+                                            <i class="material-icons">add_circle</i>
+                                        </span>
+                                        <span class="sidebar-normal">Ajout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <!-- roles -->
                     <?php if($user->isAdmin()): ?>
 

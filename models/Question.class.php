@@ -5,8 +5,9 @@ class Question extends BaseSQL
 {
     protected $id = null;
     protected $question_content;
-    private $insertedDate;
-    private $updatedDate;
+    protected $insertedDate;
+    protected $updatedDate;
+    protected $status;
     protected $possible_answers;
     protected $id_qcm;
 
@@ -14,7 +15,8 @@ class Question extends BaseSQL
     {
         parent::__construct();
         $this->possible_answers = [];
-        $this->foreign_keys = ['possible_answers'];
+        $this->foreign_keys = ['Possible_answers'];
+        $this->parent_key = 'id_qcm';
     }
 
     public function setId($id)
@@ -42,6 +44,10 @@ class Question extends BaseSQL
         $this->updatedDate = $updatedDate;
     }
 
+    public function setStatus($status){
+        $this->status = $status;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -50,6 +56,27 @@ class Question extends BaseSQL
     public function getQuestionContent()
     {
         return $this->question_content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInsertedDate()
+    {
+        return $this->insertedDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedDate()
+    {
+        return $this->updatedDate;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     public function getIdQcm()
@@ -68,7 +95,6 @@ class Question extends BaseSQL
     public function addPossibleAnswer($possible_answer){
         $this->possible_answers[]=$possible_answer;
     }
-
     public function removePossibleAnswer($possible_answer){
         $cle = array_search($possible_answer, $this->possible_answers);
         unset($this->possible_answers[$cle]);

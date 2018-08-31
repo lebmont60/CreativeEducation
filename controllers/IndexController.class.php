@@ -432,6 +432,7 @@
             {
                 if($user->allowedRole())
                 {
+
                     $v = new View("front-home", "front");
                     $v->assign('name', $_SESSION['user']['firstname']);
                 }

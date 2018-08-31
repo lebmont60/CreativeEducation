@@ -11,6 +11,7 @@
         public function __construct()
         {
             parent::__construct();
+            $this->parent_key = 'id_question';
         }
 
         public function setId($id)

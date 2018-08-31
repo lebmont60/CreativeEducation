@@ -5,12 +5,12 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs">
                     <div class="card">
                         <div class="card-header card-header-icon" data-background-color="rose">
-                            <i class="material-icons">add_circle</i>
+                            <i class="material-icons">build</i>
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">Formulaire de modification de qcm</h4>
 
-                            <?php $this->addModal("form_all", $config, $errors); ?>
+                            <?php $this->addModal("form_qcm", $config, $errors); ?>
 
                         </div>
                     </div>
@@ -21,33 +21,25 @@
 </div>
 <script>
 
-    let $addLink = $('#add_question');
-    let $newLink = $('<div></div>').append($addLink);
     jQuery(document).ready(function() {
+        let $addLink = $('#add_question_link');
         let $form = $('form');
-        $form.append($newLink);
-        $form.data('index', $form.find(':input .question').length);
-
+        $form.data('index', $form.find('div .question').length);
         $addLink.on('click', function(e) {
             e.preventDefault();
-            addQuestion($form, $newLink);
+            addQuestion($form, $addLink);
         });
 
         $('.remove-question').click(function(e) {
-            console.log("ttoto");
             e.preventDefault();
-            console.log($form);
-
-            $form.data('index', index-1);
-            $(this).parent().remove();
+            $('#'+$(this).data('remove')).remove();
 
             return false;
         });
 
-
     });
 
-    function addQuestion($form, $newLink) {
+    function addQuestion($form, $addLink) {
         let question = $addLink.data('question');
 
         let index = $form.data('index');
@@ -61,12 +53,17 @@
 
         let newForm = question.replace(/__index__/g, index);
 
-        let $newQuestion = $('#form_content').append(newForm);
+        let $newQuestion = $('#add_question').before(newForm);
 
         $('#question_'+(index)).append('<a href="#" class="remove-question">X</a>');
 
-        $newLink.before($newQuestion);
+        $('.remove-question').click(function(e) {
+            e.preventDefault();
 
+            $(this).parent().remove();
+
+            return false;
+        });
     }
 
 </script>
